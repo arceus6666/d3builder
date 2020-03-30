@@ -1,0 +1,149 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face{
+  font-family: 'Abaddon';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/abaddon.ttf') format("opentype");
+}
+
+
+/* background */
+body {
+  height: 100%;
+  background-image: url("/assets/bg1.png");
+  background-color: black;
+  /* background-position-y: 110px; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+a,
+.text-gold {
+  color: #a18e73;
+}
+
+a:hover,
+.text-gold-light {
+  color: #ebb16c;
+  text-decoration: none;
+}
+
+.block-bg {
+  background-color: rgba(230, 230, 230, 0.3);
+  border-radius: 20px;
+  margin-top: 2%;
+}
+
+.data-bg {
+  border: 30px solid;
+  padding: 15px;
+  border-image: url("/assets/frame.png") 30 round;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ebb16c;
+}
+
+hr.dashed {
+  border-top: 2px dashed #999;
+}
+
+hr.dotted {
+  border-top: 2px dotted #999;
+}
+
+hr.solid {
+  border-top: 2px solid #999;
+}
+
+hr.hr-text {
+  position: relative;
+  border: none;
+  height: 1px;
+  background: #a18e73;
+}
+
+hr.hr-text::before {
+  content: attr(data-content);
+  display: inline-block;
+  background: #310c0c;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #ebb16c;
+  border: 1px solid #a18e73;
+  /* border-color: ; */
+  border-radius: 5px;
+  padding: 0.2rem 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-bg {
+  border: 15px solid;
+  border-image: url("/assets/frame.png") 30 round;
+}
+
+.btn-d3 {
+  background: url("assets/btn.png");
+  width: 196px;
+  height: 51px;
+  color: #a18e73;
+  border: none;
+  padding-bottom: 10px;
+}
+
+/* custom select */
+.dropdown-toggle {
+  color: #a18e73;
+  padding-top: 0%;
+  width: 100%;
+}
+
+.dropdown-menu.show {
+  padding: 0;
+  border-color: #7a6f51;
+  border-width: 2px;
+}
+
+.dropdown-item {
+  color: #7a6f51;
+  border-color: #7a6f51;
+  border-radius: 10px;
+}
+
+.dropdown-item:hover {
+  color: #7a6f51;
+  border-color: #7a6f51;
+  border-radius: 10px;
+}
+
+/* inner scroll */
+.scroll-box {
+  height: 100px;
+  /* padding: 0; */
+  overflow-y: auto;
+  background-color: rgba(1, 34, 67, 0.9);
+}
+
+.scroll-box::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-box::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(43, 56, 101, 0.3);
+  box-shadow: inset 0 0 6px rgba(2, 17, 34, 0.3);
+  border-radius: 10px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(2, 17, 34, 0.8); */
+  -webkit-box-shadow: inset 0 0 6px rgba(2, 17, 34, 0.9);
+  box-shadow: inset 0 0 6px rgba(2, 17, 34, 0.9);
+  border-radius: 10px;
+}
+
+.scroll-box.dropdown-item:hover {
+  /* background-color: rgba(2, 17, 34, 0.8); */
+  background-color: rgba(122, 111, 81, 0.8);
+}

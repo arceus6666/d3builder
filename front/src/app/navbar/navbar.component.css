@@ -1,0 +1,32 @@
+.img-col {
+  float: left;
+  position: relative;
+  text-align: center;
+  /* width: 33.33%; */
+  /* padding: 5px; */
+}
+
+/* Clearfix (clear floats) */
+.img-row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.bar {
+  /* padding-top: 15px; */
+  padding-bottom: 15px;
+  /* margin-left: 5px; */
+}
+
+.txt {
+  position: absolute;
+  top: 50%;
+  /* left: 10%; */
+  /* margin-left: 10%; */
+  transform: translate(10%, -50%);
+}
+
+.link {
+  cursor: pointer;
+}

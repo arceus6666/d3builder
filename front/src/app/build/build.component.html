@@ -1,0 +1,147 @@
+<app-navbar [tree]="position" *ngIf="this.position"></app-navbar>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div> -->
+
+<div class="container data-bg" style="margin-bottom: 5%;" *ngIf="this._build">
+  <div class="binfo">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="mb-4">
+          <hr data-content="Build Info" class="hr-text btn-bg">
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm-2">icon</div>
+      <div class="col-sm-5">
+        <div class="row">
+          <div class="col-sm">{{ this._build.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm">user info here</div>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-3">rating here</div>
+    </div>
+  </div>
+  <div class="skills">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="mb-4">
+          <hr data-content="Skills" class="hr-text btn-bg">
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm">skill1</div>
+      <div class="col-sm">skill2</div>
+      <div class="col-sm">skill3</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">skill4</div>
+      <div class="col-sm">skill5</div>
+      <div class="col-sm">skill6</div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm">passive1</div>
+      <div class="col-sm">passive2</div>
+      <div class="col-sm">passive3</div>
+      <div class="col-sm">passive4</div>
+    </div>
+  </div>
+  <div class="items">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="mb-4">
+          <hr data-content="Items" class="hr-text btn-bg">
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+    <div class="row">
+      <div class="col-sm">item</div>
+      <div class="col-sm">item</div>
+    </div>
+  </div>
+  <div class="gems">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <!-- gems here -->
+      <div class="col-lg-12 mx-auto">
+        <div class="mb-4">
+          <hr data-content="Legendary Gems" class="hr-text btn-bg">
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm">gem1</div>
+      <div class="col-sm">gem2</div>
+      <div class="col-sm">gem3</div>
+    </div>
+  </div>
+  <div class="cube">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="mb-4">
+          <hr data-content="Kanai's cube" class="hr-text btn-bg">
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col-sm">cube1</div>
+      <div class="col-sm">cube2</div>
+      <div class="col-sm">cube3</div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <!-- guide here -->
+    <div class="col-lg-12 mx-auto">
+      <div class="mb-4">
+        <hr data-content="Build Guide" class="hr-text btn-bg">
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+  
+</div>

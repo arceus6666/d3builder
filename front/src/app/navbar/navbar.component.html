@@ -1,0 +1,25 @@
+<div class="bar">
+  <div class="img-row">
+    <div class="img-col link" (click)="navigate();">
+      <img src="assets/arrow_init.png">
+      <div class="txt text-gold">{{ this._0 }}</div>
+      <!-- <a [routerLink]="[ '/', this._0.toLowerCase() ]" class="txt text-gold">{{ this._0 }} </a> -->
+    </div>
+    <div *ngIf="this.tree.length > 0">
+      <div class="img-col link" *ngFor="let item of this.tree; let i = index;" (click)="navigate(i + 1);">
+        <img src="assets/arrow_pre_mid.png">
+        <img src="assets/arrow_init_1.png" width="{{item.length*17}}" height="47px">
+        <div class="txt text-gold" style="margin-left: 25px;">{{ item }}</div>
+      </div>
+    </div>
+    <div class="img-col" *ngIf="this._last" style="cursor: context-menu;">
+      <img src="assets/arrow_pre_mid.png">
+      <img src="assets/arrow_init_1.png" width="{{this._last.length*17}}" height="47px">
+      <div class="txt text-gold" style="margin-left: 25px;">{{ this._last }}</div>
+    </div>
+    <div class="img-col">
+      <img src="assets/arrow_end.png">
+    </div>
+  </div>
+</div>
+<!-- <app-navbar [tree]="this.position"></app-navbar> -->

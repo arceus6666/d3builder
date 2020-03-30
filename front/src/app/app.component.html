@@ -1,0 +1,17 @@
+<div class="sidenav">
+  <a [routerLink]="[ '/login' ]" *ngIf="!this.status()"><i class="fa fa-fw fa-sign-in-alt"></i> Login</a>
+  <a [routerLink]="[ '/register' ]" *ngIf="!this.status()"><i class="fa fa-fw fa-user-plus"></i> Register</a>
+  <a [routerLink]="[ '/home' ]"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a [routerLink]="[ '/builds' ]"><i class="far fa-fw fa-list-alt"></i> Builds</a>
+  <a [routerLink]="[ '/profile',  this.getId()]" *ngIf="this.status()"><i class="fa fa-fw fa-user"></i> Profile</a>
+  <a [routerLink]="[ '/make']" *ngIf="this.status()"><i class="fa fas fa-plus-square"></i> Create Build</a>
+</div>
+
+<div class="main">
+  <app-banner></app-banner>
+  <!-- <div style="padding-left: 15px; padding-right: 15px;"> -->
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

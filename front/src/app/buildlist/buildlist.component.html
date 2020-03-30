@@ -1,0 +1,21 @@
+<app-navbar [tree]="this.position"></app-navbar>
+<div class="row" *ngIf="!this.status()">
+  <div class="col-md-9"></div>
+  <div class="col-md-3">
+    <button type="submit" class="btn-d3">Add Build</button>
+  </div>
+</div>
+<div class="container data-bg">
+  <div class="row" *ngFor="let item of data">
+    <div class="col-7" style="border-right: 1px solid #EBB16C;">
+      icon
+      <a [routerLink]="[ '/build', item.id ]">{{ item.name }}</a>
+    </div>
+    <div class="col-2 center" style="border-right: 1px solid #EBB16C;">
+      rating
+    </div>
+    <div class="col-3 center">
+      update
+    </div>
+  </div>
+</div>
