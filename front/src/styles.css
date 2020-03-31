@@ -67,7 +67,8 @@ hr.hr-text::before {
   display: inline-block;
   background: #310c0c;
   font-weight: bold;
-  font-size: 0.85rem;
+  font-size: 1.5rem;
+  font-family: 'Abaddon';
   color: #ebb16c;
   border: 1px solid #a18e73;
   /* border-color: ; */

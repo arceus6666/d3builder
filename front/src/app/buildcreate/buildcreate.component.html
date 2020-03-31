@@ -1,1 +1,366 @@
-<p>buildcreate works!</p>
+<app-navbar [tree]="['Home','Builds','Add Build']"></app-navbar>
+<div class="box data-bg">
+  <div class="title">
+    <span>New Build</span>
+  </div>
+
+  <form [formGroup]="_buildForm">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="buildnameInput">Build Name</label>
+        <input type="text" class="form-control" id="buildnameInput" placeholder="My Awesome Build"
+          formControlName="name">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="buildinfoInput">Build Info</label>
+        <textarea type="text" class="form-control" id="buildinfoInput"
+          placeholder="My Awesome Build&#10;Is made from the awesomeness of this awesome items..."
+          formControlName="info" rows="2"></textarea>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="mb-4">
+        <hr data-content="Skills" class="hr-text btn-bg">
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <form [formGroup]="_skillsForm">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a skill</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="builditem1Input">Select a passive.</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="builditem1Input">Select a passive.</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="builditem1Input">Select a passive.</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="builditem1Input">Select a passive.</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_skill1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="mb-4">
+        <hr data-content="Items" class="hr-text btn-bg">
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <form [formGroup]="_itemsForm">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Head</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Shoulders</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Amulet</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Torso</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Wrists</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Hands</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Waist</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Legs</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Feet</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="builditem1Input">Ring #1</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="builditem1Input">Ring #2</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="builditem1Input">Weapon</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="builditem1Input">Offhand</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="mb-4">
+        <hr data-content="Kanai's Cube" class="hr-text btn-bg">
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <form [formGroup]="_cubeForm">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Weapon Power</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Armor Power</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Jewelry Power</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="mb-4">
+        <hr data-content="Legendary Gems" class="hr-text btn-bg">
+      </div>
+    </div>
+  </div>
+  <div class="row">&nbsp;</div>
+
+  <form [formGroup]="_cubeForm">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a Gem</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a Gem</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="builditem1Input">Select a Gem</label>
+        <select class="form-control" id="builditem1Input" formControlName="id_item1">
+          <option value="en">will</option>
+          <option value="es">show</option>
+          <option value="fr">the</option>
+          <option value="it">list</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+      <button type="submit" class="btn-d3" (click)="submit()">Create</button>
+    </div>
+  </div>
+
+</div>

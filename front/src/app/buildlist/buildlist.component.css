@@ -3,9 +3,13 @@
 }
 
 button {
-  padding-top: 2%;
+  padding-top: 1%;
   font-family: "Abaddon";
   /* font-size: 60px; */
   border: none;
   margin-bottom: 5%;
+}
+
+span {
+  font-family: "Abaddon";
 }
