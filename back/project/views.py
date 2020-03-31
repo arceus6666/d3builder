@@ -1,165 +1,50 @@
 from rest_framework import generics
-from django.http import HttpResponse
-# from django.views.decorators.csrf import csrf_exempt
-# from braces.views import CsrfExemptMixin
+from django.http import HttpResponse, JsonResponse
+from rest_framework import status
+from rest_framework.response import Response
+
+from .helper import makeResponse, modelValidator
 
 from .models import User, Build, Skill, Item, BuildGems, BuildCubes, BuildItems, BuildSkills, VoteBuildUser
-# from .serializers import ProjectSerializer, StudentSerializer, UserSerializer
+
 from .serializers import UserSerializer, BuildSerializer, SkillSerializer, ItemSerializer, BuildGemsSerializer, BuildCubesSerializer, BuildItemsSerializer, BuildSkillsSerializer, VoteBuildUserSerializer
 
-# @csrf_exempt
-
-
-# class ListProject(CsrfExemptMixin, generics.ListCreateAPIView):
-# class ListProject(generics.ListCreateAPIView):
-#     # authentication_classes = []
-#     queryset = Project.objects.all()
-#     serializer_class = ProjectSerializer
-
-# @csrf_exempt
-
-
-# class DetailProject(CsrfExemptMixin, generics.RetrieveUpdateDestroyAPIView):
-# class DetailProject(generics.RetrieveUpdateDestroyAPIView):
-#     # authentication_classes = []
-#     queryset = Project.objects.all()
-#     serializer_class = ProjectSerializer
-
-
-# class ListStudent(generics.ListCreateAPIView):
-#     queryset = Student.objects.all()
-#     serializer_class = StudentSerializer
-
-
-# class DetailStudent(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Student.objects.all()
-#     serializer_class = StudentSerializer
-
-mainview = '''
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D3Builder api</title>
-  <style>
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 50px;
-      font-size: 100%;
-      line-height: 1.5;
-      font-family: Calibri;
-      background: #334d50;
-      background: -webkit-linear-gradient(to right, #cbcaa5, #334d50);
-      background: linear-gradient(to right, #cbcaa5, #334d50);
-
-    }
-
-    *,
-    *:before,
-    *:after {
-      box-sizing: border-box;
-    }
-
-    .cf:before,
-    .cf:after {
-      content: " ";
-      display: table;
-    }
-
-    .cf:after {
-      clear: both;
-    }
-
-    .cf {
-      *zoom: 1;
-    }
-
-    .wrapper {
-      width: 50%;
-      margin: 50px auto;
-      background: #fff;
-      padding: 2em;
-    }
-
-    ul {
-      counter-reset: my-counter;
-      list-style-type: none;
-    }
-
-    ul ol {
-      margin-left: 0.9em;
-    }
-
-    ul li {
-      line-height: 1.5;
-    }
-
-    ul li::before {
-      font-weight: 700;
-      text-transform: uppercase;
-      padding-right: 3px;
-    }
-
-    h1 {
-      font-family: "Fjalla One", sans-serif;
-      font-size: 3em;
-      text-transform: uppercase;
-      text-align: center;
-      font-weight: 400;
-      color: rgb(25, 159, 158);
-      border-bottom: 1px solid rgb(25, 159, 158);
-      margin-bottom: 1em;
-    }
-
-    a {
-      font-size: 2em;
-      color: #cbcaa5;
-      text-decoration: none;
-    }
-
-  </style>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
-
-<body>
-  <div class="wrapper">
-    <h1>List of available pages</h1>
-    <ul>
-      <li><a href="/api/user"><i class="fas fa-angle-right"></i> Users section</a></li>
-      <li><a href="/api/build"><i class="fas fa-angle-right"></i> Builds section</a></li>
-      <li><a href="/api/skill"><i class="fas fa-angle-right"></i> Skills section</a></li>
-      <li><a href="/api/item"><i class="fas fa-angle-right"></i> Items section</a></li>
-      <li><a href="/api/buildgems"><i class="fas fa-angle-right"></i> Build - Gems conection section</a></li>
-      <li><a href="/api/buildcubes"><i class="fas fa-angle-right"></i> Build - Cube items conection section</a></li>
-      <li><a href="/api/builditems"><i class="fas fa-angle-right"></i> Build - Items conection section</a></li>
-      <li><a href="/api/buildskills"><i class="fas fa-angle-right"></i> Build - Skills conection section</a></li>
-      <li><a href="/api/votebuilduser"><i class="fas fa-angle-right"></i> Vote - Build - User conection section</a></li>
-    </ul>
-  </div>
-</body>
-
-</html>
-
-'''
 
 def index(req):
-  return HttpResponse(mainview)
+    f = open('project/index.html', 'r')
+    mainview = f.read()
+    f.close()
+    return HttpResponse(mainview)
+
 
 class ListUser(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class DetailUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+def userbyid(request, uid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = User.objects.get(_id=uid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, UserSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = User.objects.get(_id=uid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListBuild(generics.ListCreateAPIView):
@@ -167,9 +52,29 @@ class ListBuild(generics.ListCreateAPIView):
     serializer_class = BuildSerializer
 
 
-class DetailBuild(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Build.objects.all()
-    serializer_class = BuildSerializer
+def buildbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = Build.objects.get(_id=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, BuildSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = Build.objects.get(_id=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListSkill(generics.ListCreateAPIView):
@@ -177,9 +82,29 @@ class ListSkill(generics.ListCreateAPIView):
     serializer_class = SkillSerializer
 
 
-class DetailSkill(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Skill.objects.all()
-    serializer_class = SkillSerializer
+def skillbyid(request, sid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = Skill.objects.get(_id=sid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, SkillSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = Skill.objects.get(_id=sid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListItem(generics.ListCreateAPIView):
@@ -187,19 +112,82 @@ class ListItem(generics.ListCreateAPIView):
     serializer_class = ItemSerializer
 
 
-class DetailItem(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+def itembyid(request, iid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = Item.objects.get(_id=iid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, ItemSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = Item.objects.get(_id=iid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
+def getGems(request):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = Item.objects.get(itype1=1)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, ItemSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = Item.objects.get(itype1=1).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 class ListBuildGems(generics.ListCreateAPIView):
     queryset = BuildGems.objects.all()
     serializer_class = BuildGemsSerializer
 
 
-class DetailBuildGems(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BuildGems.objects.all()
-    serializer_class = BuildGemsSerializer
+def buildgemsbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = BuildGems.objects.get(id_build=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, BuildGemsSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = BuildGems.objects.get(id_build=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListBuildCubes(generics.ListCreateAPIView):
@@ -207,9 +195,29 @@ class ListBuildCubes(generics.ListCreateAPIView):
     serializer_class = BuildCubesSerializer
 
 
-class DetailBuildCubes(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BuildCubes.objects.all()
-    serializer_class = BuildCubesSerializer
+def buildcubesbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = BuildCubes.objects.get(id_build=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, BuildCubesSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = BuildCubes.objects.get(id_build=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListBuildItems(generics.ListCreateAPIView):
@@ -217,9 +225,29 @@ class ListBuildItems(generics.ListCreateAPIView):
     serializer_class = BuildItemsSerializer
 
 
-class DetailBuildItems(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BuildItems.objects.all()
-    serializer_class = BuildItemsSerializer
+def builditemsbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = BuildItems.objects.get(id_build=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, BuildItemsSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = BuildItems.objects.get(id_build=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListBuildSkills(generics.ListCreateAPIView):
@@ -227,9 +255,29 @@ class ListBuildSkills(generics.ListCreateAPIView):
     serializer_class = BuildSkillsSerializer
 
 
-class DetailBuildSkills(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BuildSkills.objects.all()
-    serializer_class = BuildSkillsSerializer
+def buildskillsbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = BuildSkills.objects.get(id_build=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, BuildSkillsSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = BuildSkills.objects.get(id_build=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json
 
 
 class ListVoteBuildUser(generics.ListCreateAPIView):
@@ -237,6 +285,26 @@ class ListVoteBuildUser(generics.ListCreateAPIView):
     serializer_class = VoteBuildUserSerializer
 
 
-class DetailVoteBuildUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = VoteBuildUser.objects.all()
-    serializer_class = VoteBuildUserSerializer
+def votebuiluserdbyid(request, bid=''):
+    method = request.method
+    json = makeResponse(None, 500, 'Something wrong happened')
+    try:
+        queryset = VoteBuildUser.objects.get(id_build=bid)
+    except:
+        return makeResponse(None, 204, 'No Element Found')
+    if method == 'GET':
+        data = queryset.__json__
+        json = makeResponse(data, 200, 'Element Found')
+    elif method == 'DELETE':
+        data = queryset.__json__
+        queryset.delete()
+        json = makeResponse(data, 200, 'Element Deleted')
+    elif method == 'PUT':
+        validated = modelValidator(queryset, request, VoteBuildUserSerializer)
+        if validated is None:
+            json = makeResponse(None, 406, 'Wrong arguments')
+        else:
+            validated.save()
+            data = VoteBuildUser.objects.get(id_build=bid).__json__
+            json = makeResponse(data, 200, 'Element Updated')
+    return json

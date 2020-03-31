@@ -30,6 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            '_id',
             'first_name',
             'last_name',
             'username',
@@ -47,6 +48,7 @@ class BuildSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            '_id',
             'name',
             'user',
             'info'
@@ -58,6 +60,7 @@ class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            '_id',
             'name',
             'image',
             'stype',
@@ -70,8 +73,10 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            '_id',
             'name',
-            'itype',
+            'itype1',
+            'itype2',
             'rarity',
             'image',
             'info'

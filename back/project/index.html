@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3Builder api</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 50px;
+      font-size: 100%;
+      line-height: 1.5;
+      font-family: Calibri;
+      background: #334d50;
+      background: -webkit-linear-gradient(to right, #cbcaa5, #334d50);
+      background: linear-gradient(to right, #cbcaa5, #334d50);
+
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    .cf:before,
+    .cf:after {
+      content: " ";
+      display: table;
+    }
+
+    .cf:after {
+      clear: both;
+    }
+
+    .cf {
+      *zoom: 1;
+    }
+
+    .wrapper {
+      width: 50%;
+      margin: 50px auto;
+      background: #fff;
+      padding: 2em;
+    }
+
+    ul {
+      counter-reset: my-counter;
+      list-style-type: none;
+    }
+
+    ul ol {
+      margin-left: 0.9em;
+    }
+
+    ul li {
+      line-height: 1.5;
+    }
+
+    ul li::before {
+      font-weight: 700;
+      text-transform: uppercase;
+      padding-right: 3px;
+    }
+
+    h1 {
+      font-family: "Fjalla One", sans-serif;
+      font-size: 3em;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 400;
+      color: rgb(25, 159, 158);
+      border-bottom: 1px solid rgb(25, 159, 158);
+      margin-bottom: 1em;
+    }
+
+    a {
+      font-size: 2em;
+      color: #cbcaa5;
+      text-decoration: none;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>List of available pages</h1>
+    <ul>
+      <li><a href="/api/user"><i class="fas fa-angle-right"></i> Users section</a></li>
+      <li><a href="/api/build"><i class="fas fa-angle-right"></i> Builds section</a></li>
+      <li><a href="/api/skill"><i class="fas fa-angle-right"></i> Skills section</a></li>
+      <li><a href="/api/item"><i class="fas fa-angle-right"></i> Items section</a></li>
+      <li><a href="/api/buildgems"><i class="fas fa-angle-right"></i> Build - Gems conection section</a></li>
+      <li><a href="/api/buildcubes"><i class="fas fa-angle-right"></i> Build - Cube items conection section</a></li>
+      <li><a href="/api/builditems"><i class="fas fa-angle-right"></i> Build - Items conection section</a></li>
+      <li><a href="/api/buildskills"><i class="fas fa-angle-right"></i> Build - Skills conection section</a></li>
+      <li><a href="/api/votebuilduser"><i class="fas fa-angle-right"></i> Vote - Build - User conection section</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
